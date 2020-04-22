@@ -1,5 +1,4 @@
 # WildLifeSanctuary
-
 One stop destination for all your enquiries.
 
 ## Available Scripts
