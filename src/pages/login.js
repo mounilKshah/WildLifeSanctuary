@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "../hooks/form-hook";
 import {
   VALIDATOR_EMAIL,
@@ -22,10 +23,31 @@ const Login = () => {
     },
   });
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     console.log(formState);
-    auth.login();
+    try {
+      const response = await fetch("http://localhost:5000/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formState.inputs.email_input.value,
+          password: formState.inputs.password_input.value,
+        }),
+      });
+
+      const responseData = await response.json();
+      if (!response.ok) {
+        alert(responseData.message);
+        throw new Error(responseData.message);
+      }
+      console.log(responseData);
+      auth.login(responseData.user.id);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -49,15 +71,21 @@ const Login = () => {
           validators={[VALIDATOR_MINLENGTH(6)]}
           onInput={InputHandler}
         />
-        <button type="submit" disabled={!formState.isValid}>
+        <button
+          className={`b ph3 pv2 input-reset ba b--black   pointer f6 dib ${
+            !formState.isValid ? "bg-black" : "grow "
+          }`}
+          type="submit"
+          disabled={!formState.isValid}
+        >
           SUBMIT
         </button>
-        <a
-          class="f6 f5-l link bg-animate black-80 hover-bg-light-yellow dib pa3 ph4-l"
-          href="/auth"
+        <Link
+          class="f f5-l link bg-animate black-80 hover-grow dib pa3 ph4-l"
+          to="/auth"
         >
           Not Registered?{" "}
-        </a>
+        </Link>
       </form>
     </div>
   );

@@ -1,18 +1,19 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   card: {
     width: 345,
-    height :380,
-    //background: 'linear-gradient(to right, #56ab2f, #a8e063)'
+    height: 380,
+    background: "#ffce00",
+    margin: 15,
   },
   media: {
     height: 300,
@@ -22,19 +23,18 @@ const useStyles = makeStyles({
 function MediaCard(props) {
   const classes = useStyles();
 
-
   return (
-    <Card className={classes.card} onClick = {props.toFlip}>
+    <Card className={`grow ${classes.card}`} onClick={props.toFlip}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
           image={require(`./${props.name}.jpg`)}
-          style = {{height:300,width:'auto'}}
+          style={{ height: 300, width: "auto" }}
           title="Contemplative Reptile"
         />
 
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography className="" gutterBottom variant="h5" component="h2">
             {props.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">

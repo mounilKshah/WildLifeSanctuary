@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import logo from "./logo.svg";
+
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -15,14 +16,18 @@ import Login from "./pages/login";
 import { AuthContext } from "./context/authContext";
 import NewPhoto from "./pages/newPhoto";
 import Navbar from "./components/landing/Navbar/Navbar";
+import AllPhotos from "./pages/allPhotos";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userID, setUserID] = useState(null);
 
-  const signin = useCallback(() => {
+  const signin = useCallback((uid) => {
+    setUserID(uid);
     setIsLoggedIn(true);
   });
   const signout = useCallback(() => {
+    setUserID(null);
     setIsLoggedIn(false);
   });
 
@@ -41,6 +46,9 @@ function App() {
         </Route>
         <Route path="/addPhoto" exact>
           <NewPhoto />
+        </Route>
+        <Route path="/allPhotos" exact>
+          <AllPhotos />
         </Route>
         <Redirect to="/" />
       </Switch>
@@ -64,17 +72,27 @@ function App() {
         <Route path="/login" exact>
           <Login />
         </Route>
+        <Route path="/allPhotos" exact>
+          <AllPhotos />
+        </Route>
         <Redirect to="./login" />
       </Switch>
     );
   return (
     <div className="App">
       <AuthContext.Provider
-        value={{ isLoggedIn: isLoggedIn, login: signin, logout: signout }}
+        value={{
+          isLoggedIn: isLoggedIn,
+          login: signin,
+          logout: signout,
+          userID: userID,
+        }}
       >
         <Router>
-          <Navbar />
-          {routes}
+          <header>
+            <Navbar />
+          </header>
+          <div className=""> {routes}</div>
         </Router>
       </AuthContext.Provider>
     </div>

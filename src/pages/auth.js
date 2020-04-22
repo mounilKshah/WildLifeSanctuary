@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "../hooks/form-hook";
+import { AuthContext } from "../context/authContext";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH,
 } from "../shared/utils/validators";
 import Input from "../components/formElements/Input";
+import ImageUpload from "../components/formElements/ImageUpload";
 
 const Auth = () => {
+  const auth = useContext(AuthContext);
   const [formState, InputHandler] = useForm({
     name_input: {
       value: "",
@@ -23,9 +27,33 @@ const Auth = () => {
     },
   });
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     console.log(formState);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/users/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formState.inputs.name_input.value,
+          email: formState.inputs.email_input.value,
+          password: formState.inputs.password_input.value,
+        }),
+      });
+
+      const responseData = await response.json();
+      if (!response.ok) {
+        alert(responseData.message);
+        throw new Error(responseData.message);
+      }
+      console.log(responseData);
+      auth.login(responseData.user.id);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -57,15 +85,22 @@ const Auth = () => {
         validators={[VALIDATOR_MINLENGTH(6)]}
         onInput={InputHandler}
       />
-      <button type="submit" disabled={!formState.isValid}>
+
+      <button
+        className={`b ph3 pv2 input-reset ba b--black   pointer f6 dib ${
+          !formState.isValid ? "bg-black" : "grow "
+        }`}
+        type="submit"
+        disabled={!formState.isValid}
+      >
         SUBMIT
       </button>
-      <a
-        class="f6 f5-l link bg-animate black-80 hover-bg-light-yellow dib pa3 ph4-l"
-        href="/login"
+      <Link
+        class="f6 f5-l link bg-animate black-80 hover-grow dib pa3 ph4-l"
+        to="/login"
       >
         Actually i did register lol{" "}
-      </a>
+      </Link>
     </form>
   );
 };

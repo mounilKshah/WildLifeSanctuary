@@ -45,6 +45,7 @@ const Input = (props) => {
   const element =
     props.element === "input" ? (
       <input
+        className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-20"
         id={props.id}
         type={props.type}
         placeholder={props.placeholder}
@@ -54,6 +55,7 @@ const Input = (props) => {
       />
     ) : (
       <textarea
+        className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-20"
         id={props.id}
         rows={props.rows || 3}
         onBlur={touchHandler}
@@ -64,7 +66,7 @@ const Input = (props) => {
   return (
     <div>
       <label
-        className={`${
+        className={`db fw6 lh-copy f6${
           !inputState.isValid && inputState.isTouched && "is-invalid"
         }`}
         htmlFor={props.id}
