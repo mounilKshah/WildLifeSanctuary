@@ -17,6 +17,7 @@ import { AuthContext } from "./context/authContext";
 import NewPhoto from "./pages/newPhoto";
 import Navbar from "./components/landing/Navbar/Navbar";
 import AllPhotos from "./pages/allPhotos";
+import Book from "./pages/bookTour";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -49,6 +50,9 @@ function App() {
         </Route>
         <Route path="/allPhotos" exact>
           <AllPhotos />
+        </Route>
+        <Route path="/bookTour" exact>
+          <Book />
         </Route>
         <Redirect to="/" />
       </Switch>
