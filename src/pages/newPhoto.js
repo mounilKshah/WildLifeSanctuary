@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Input from "../components/formElements/Input";
 import ImageUpload from "../components/formElements/ImageUpload";
 import { VALIDATOR_REQUIRE } from "../shared/utils/validators";
@@ -12,26 +12,25 @@ const NewPhoto = () => {
       value: "",
       isValid: false,
     },
-    sanctuary_input: {
-      value: "",
-      isValid: false,
-    },
+
     image_input: {
       value: null,
       isValid: false,
     },
   });
-
+  const [sanctuary_input, setSanctuaryInput] = useState("Gir");
   const submitHandler = async (event) => {
     event.preventDefault();
     //console.log(auth);
     //console.log(auth.userID);
     //console.log(formState);
+
     const formData = new FormData();
     formData.append("title", formState.inputs.title_input.value);
-    formData.append("sanctuary", formState.inputs.sanctuary_input.value);
+    formData.append("sanctuary", sanctuary_input);
     formData.append("creator", auth.userID);
     formData.append("image", formState.inputs.image_input.value);
+    console.log(sanctuary_input);
     console.log(auth.userID);
     try {
       const response = await fetch("http://localhost:5000/api/photos", {
@@ -67,6 +66,10 @@ const NewPhoto = () => {
         id="sanctuary_input"
         name="Sanctuary"
         className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-20"
+        onChange={(e) => {
+          console.log(sanctuary_input);
+          setSanctuaryInput(e.target.value);
+        }}
       >
         <option value="Gir">Gir</option>
         <option value="Karnala">Karnala</option>

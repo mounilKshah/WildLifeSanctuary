@@ -1,23 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Input from "../components/formElements/Input";
 import ImageUpload from "../components/formElements/ImageUpload";
 import { VALIDATOR_REQUIRE } from "../shared/utils/validators";
 import { useForm } from "../hooks/form-hook";
 import { AuthContext } from "../context/authContext";
+import Book from "../components/formElements/book";
 
 const NewBooking = () => {
   const auth = useContext(AuthContext);
   const [formState, InputHandler] = useForm({
-    sanctuary_input: {
-      value: "",
-      isValid: false,
-    },
     day_input: {
       value: null,
       isValid: false,
     },
   });
-
+  const [sanctuary_input, setSanctuaryInput] = useState("Gir");
   const submitHandler = async (event) => {
     event.preventDefault();
     console.log(formState);
@@ -29,7 +26,7 @@ const NewBooking = () => {
         },
         body: JSON.stringify({
           day: formState.inputs.day_input.value,
-          sanctuary: formState.inputs.sanctuary_input.value,
+          sanctuary: sanctuary_input,
           creator: auth.userID,
         }),
       });
@@ -39,6 +36,7 @@ const NewBooking = () => {
         throw new Error(responseData.message);
       }
       console.log(responseData);
+      alert("Succesfully Booked");
     } catch (err) {
       console.log(err);
     }
@@ -46,15 +44,19 @@ const NewBooking = () => {
 
   return (
     <form onSubmit={submitHandler}>
-      <Input
+      <Book></Book>
+      <select
         id="sanctuary_input"
-        element="input"
-        type="text"
-        label="Sanctuary"
-        errorText={"please enter a valid Sanctuary"}
-        validators={[VALIDATOR_REQUIRE()]}
-        onInput={InputHandler}
-      />
+        name="Sanctuary"
+        className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-20"
+        onChange={(e) => {
+          setSanctuaryInput(e.target.value);
+        }}
+      >
+        <option value="Gir">Gir</option>
+        <option value="Karnala">Karnala</option>
+        <option value="Jim Corbett">Jim Corbett</option>
+      </select>
       <Input
         id="day_input"
         element="input"

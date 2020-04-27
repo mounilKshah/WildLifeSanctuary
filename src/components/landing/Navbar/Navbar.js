@@ -5,7 +5,7 @@ import { AuthContext } from "../../../context/authContext";
 const Navbar = (props) => {
   const auth = useContext(AuthContext);
   return (
-    <div className="fl w-100 pa2 bg-black flex justify-between">
+    <div className="fl w-100  bg-black flex justify-between">
       <header class="w-100 white-80 tc pv2 avenir flex justify-between">
         <Link to="/" exact class="mt0 mb0 white i fw1 f1 no-underline grow">
           Wildlife
@@ -43,6 +43,14 @@ const Navbar = (props) => {
               to="/addPhoto"
             >
               Add Photo{" "}
+            </Link>
+          )}
+          {auth.isLoggedIn && (
+            <Link
+              class="f6 f5-l link bg-animate white-80 hover-bg-light-yellow hover-black dib pa3 ph4-l"
+              to="/profile"
+            >
+              My Uploads{" "}
             </Link>
           )}
           {auth.isLoggedIn && (

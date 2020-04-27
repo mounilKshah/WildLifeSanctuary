@@ -34,9 +34,6 @@ const Sanctuary = (props) => {
           </section>
         </div>
       </div>
-      <h4 className="f3 fw4 i lh-title mt0">
-        Check out the animals while you are here
-      </h4>
     </article>
   );
 };

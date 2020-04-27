@@ -19,6 +19,7 @@ import Navbar from "./components/landing/Navbar/Navbar";
 import AllPhotos from "./pages/allPhotos";
 import NewBooking from "./pages/newBooking";
 import Sanctuary from "./pages/sanctuary";
+import Profile from "./pages/profile";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -39,6 +40,9 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <Landing />
+        </Route>
+        <Route path="/profile" exact>
+          <Profile />
         </Route>
         <Route path="/animals" exac>
           <Animals />
