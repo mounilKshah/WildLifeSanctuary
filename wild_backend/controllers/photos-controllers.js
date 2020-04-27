@@ -52,6 +52,7 @@ const getPhotosByUserId = async (req, res, next) => {
 };
 
 const createPhoto = async (req, res, next) => {
+  console.log(req.body);
   const { title, sanctuary, creator } = req.body;
   const createdPhoto = new Photo({
     title,
@@ -61,6 +62,7 @@ const createPhoto = async (req, res, next) => {
     image: req.file.path,
     likes: 0,
   });
+  console.log(createdPhoto);
 
   let user;
   try {

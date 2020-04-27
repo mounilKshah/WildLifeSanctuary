@@ -32,6 +32,7 @@ const NewPhoto = () => {
     formData.append("sanctuary", formState.inputs.sanctuary_input.value);
     formData.append("creator", auth.userID);
     formData.append("image", formState.inputs.image_input.value);
+    console.log(auth.userID);
     try {
       const response = await fetch("http://localhost:5000/api/photos", {
         method: "POST",
@@ -61,15 +62,16 @@ const NewPhoto = () => {
         validators={[VALIDATOR_REQUIRE()]}
         onInput={InputHandler}
       />
-      <Input
+
+      <select
         id="sanctuary_input"
-        element="input"
-        type="text"
-        label="Sanctuary"
-        errorText={"please enter a valid Sanctuary"}
-        validators={[VALIDATOR_REQUIRE()]}
-        onInput={InputHandler}
-      />
+        name="Sanctuary"
+        className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-20"
+      >
+        <option value="Gir">Gir</option>
+        <option value="Karnala">Karnala</option>
+        <option value="Jim Corbett">Jim Corbett</option>
+      </select>
       <ImageUpload
         id="image_input"
         onInput={InputHandler}

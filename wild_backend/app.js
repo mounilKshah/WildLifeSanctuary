@@ -6,8 +6,11 @@ const HttpError = require("./models/http-error");
 const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
+const animalRoutes = require("./routes/animal-routes");
+const bookingRoutes = require("./routes/booking-routes");
+const sanctuaryRoutes = require("./routes/sanctuary-routes");
 
-app.use(bodyParser.json());
+app.use(bodyParser());
 
 app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
@@ -20,6 +23,9 @@ app.use((req, res, next) => {
 
 app.use("/api/photos", photoRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/animals", animalRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/sanctuaries", sanctuaryRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route", 404);

@@ -25,6 +25,14 @@ const Auth = () => {
       value: "",
       isValid: false,
     },
+    gender_input: {
+      value: "",
+      isValid: false,
+    },
+    age_input: {
+      value: "",
+      isValid: false,
+    },
   });
 
   const submitHandler = async (event) => {
@@ -41,6 +49,8 @@ const Auth = () => {
           name: formState.inputs.name_input.value,
           email: formState.inputs.email_input.value,
           password: formState.inputs.password_input.value,
+          gender: formState.inputs.gender_input.value,
+          age: formState.inputs.age_input.value,
         }),
       });
 
@@ -85,6 +95,24 @@ const Auth = () => {
         validators={[VALIDATOR_MINLENGTH(6)]}
         onInput={InputHandler}
       />
+      <Input
+        id="age_input"
+        element="input"
+        type="text"
+        label="Age"
+        errorText={"please enter a valid age"}
+        validators={[VALIDATOR_REQUIRE()]}
+        onInput={InputHandler}
+      />
+      <Input
+        id="gender_input"
+        element="input"
+        type="text"
+        label="Gender"
+        errorText={"please enter a valid gender"}
+        validators={[VALIDATOR_REQUIRE()]}
+        onInput={InputHandler}
+      />
 
       <button
         className={`b ph3 pv2 input-reset ba b--black   pointer f6 dib ${
@@ -99,7 +127,7 @@ const Auth = () => {
         class="f6 f5-l link bg-animate black-80 hover-grow dib pa3 ph4-l"
         to="/login"
       >
-        Actually i did register lol{" "}
+        I have registered{" "}
       </Link>
     </form>
   );

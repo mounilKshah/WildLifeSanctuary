@@ -17,6 +17,8 @@ import { AuthContext } from "./context/authContext";
 import NewPhoto from "./pages/newPhoto";
 import Navbar from "./components/landing/Navbar/Navbar";
 import AllPhotos from "./pages/allPhotos";
+import NewBooking from "./pages/newBooking";
+import Sanctuary from "./pages/sanctuary";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,6 +52,18 @@ function App() {
         <Route path="/allPhotos" exact>
           <AllPhotos />
         </Route>
+        <Route path="/Gir" exact>
+          <Sanctuary sanctuary_name="Gir" />
+        </Route>
+        <Route path="/JimCorbett" exact>
+          <Sanctuary sanctuary_name="Jim Corbett" />
+        </Route>
+        <Route path="/Karnala" exact>
+          <Sanctuary sanctuary_name="Karnala" />
+        </Route>
+        <Route path="/addBooking" exact>
+          <NewBooking />
+        </Route>
         <Redirect to="/" />
       </Switch>
     );
@@ -58,6 +72,15 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <Landing />
+        </Route>
+        <Route path="/Gir" exact>
+          <Sanctuary sanctuary_name="Gir" />
+        </Route>
+        <Route path="/JimCorbett" exact>
+          <Sanctuary sanctuary_name="Jim Corbett" />
+        </Route>
+        <Route path="/Karnala" exact>
+          <Sanctuary sanctuary_name="Karnala" />
         </Route>
         <Route path="/animals" exact>
           <Animals />
@@ -75,7 +98,7 @@ function App() {
         <Route path="/allPhotos" exact>
           <AllPhotos />
         </Route>
-        <Redirect to="./login" />
+        <Redirect to="/login" />
       </Switch>
     );
   return (

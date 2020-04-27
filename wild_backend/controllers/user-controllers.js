@@ -15,7 +15,7 @@ const getUsers = (req, res, next) => {
 };
 
 const signup = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, gender, age } = req.body;
 
   let existingUser;
   try {
@@ -34,6 +34,9 @@ const signup = async (req, res, next) => {
     email,
     password,
     photos: [],
+    gender,
+    age,
+    booking: [],
   });
   //DUMMY_USERS.push(createdUser);
 

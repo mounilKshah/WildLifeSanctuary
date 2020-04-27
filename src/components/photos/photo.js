@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -17,7 +18,11 @@ function MediaCard(props) {
         <dd class="ml0">{props.title}</dd>
         <dt class="clip ">Artist</dt>
         <dd class="ml0 gray">{`Photo by : ${props.creator}`}</dd>
-        <dd class="ml0 gray">{`Taken at : ${props.sanctuary}`}</dd>
+        <Link
+          to={`/${props.sanctuary.split(" ").join("")}`}
+          exact
+          class="ml0 gray"
+        >{`Taken at : ${props.sanctuary}`}</Link>
       </dl>
     </div>
   );

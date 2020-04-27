@@ -14,17 +14,7 @@ const Article = (props) => {
         backgroundPosition: "center",
       }}
     >
-      <article className="athelas">
-        <div>
-          <div className="dtc v-mid">
-            <h1 className="f1 f-headline-l fw1 i white-60">Wildlife</h1>
-            <blockquote class="ph0 mh0 measure f4 lh-copy center">
-              <p className="fw1 white-70">Your guide to Nature</p>
-              {/*<cite class="f6 ttu tracked fs-normal">Massimo Vignelli</cite>*/}
-            </blockquote>
-          </div>
-        </div>
-      </article>
+      <article className="athelas bg-black"></article>
     </div>
   );
 };
