@@ -50,7 +50,7 @@ const Navbar = (props) => {
               class="f6 f5-l link bg-animate white-80 hover-bg-light-yellow hover-black dib pa3 ph4-l"
               to="/profile"
             >
-              My Uploads{" "}
+              My Profile{" "}
             </Link>
           )}
           {auth.isLoggedIn && (

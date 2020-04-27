@@ -22,9 +22,10 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/photos", photoRoutes);
+app.use("/api/bookings", bookingRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/animals", animalRoutes);
-app.use("/api/bookings", bookingRoutes);
+
 app.use("/api/sanctuaries", sanctuaryRoutes);
 
 app.use((req, res, next) => {

@@ -1,18 +1,6 @@
 const HttpError = require("../models/http-error");
 const uuid = require("uuid/v4");
 const User = require("../models/user");
-let DUMMY_USERS = [
-  {
-    id: "u1",
-    name: "Advait",
-    email: "advaitsankhe23@gmail.com",
-    password: "advait2000",
-  },
-];
-
-const getUsers = (req, res, next) => {
-  res.status(200).json({ users: DUMMY_USERS });
-};
 
 const signup = async (req, res, next) => {
   const { name, email, password, gender, age } = req.body;
@@ -21,7 +9,7 @@ const signup = async (req, res, next) => {
   try {
     existingUser = await User.findOne({ email: email });
   } catch (err) {
-    return next(new HttpError("Siggn up failed", 500));
+    return next(new HttpError("Sign up failed", 500));
   }
 
   if (existingUser) {
@@ -71,4 +59,3 @@ const login = async (req, res, next) => {
 
 exports.login = login;
 exports.signup = signup;
-exports.getUsers = getUsers;

@@ -4,6 +4,29 @@ const mongoose = require("mongoose");
 const Booking = require("../models/booking");
 const User = require("../models/user");
 
+const getBookingsByUserId = async (req, res, next) => {
+  console.log("hey");
+  const user_id = req.params.uid;
+  let bookings;
+  try {
+    bookings = await Booking.find({ creator: user_id });
+  } catch (err) {
+    const error = new HttpError("Something went wrong user id", 404);
+    return next(error);
+  }
+
+  if (!bookings || bookings.length === 0) {
+    return next(
+      new HttpError("Could not find photos for provided user id", 404)
+    );
+  }
+  console.log(bookings);
+  console.log("HERE");
+  return res.json({
+    bookings: bookings.map((booking) => booking.toObject({ getters: true })),
+  });
+};
+
 const createBooking = async (req, res, next) => {
   const createdBooking = new Booking({
     sanctuary: req.body.sanctuary,
@@ -38,3 +61,4 @@ const createBooking = async (req, res, next) => {
 };
 
 exports.createBooking = createBooking;
+exports.getBookingsByUserId = getBookingsByUserId;
